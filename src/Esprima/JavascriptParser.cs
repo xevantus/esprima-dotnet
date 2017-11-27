@@ -11,7 +11,7 @@ namespace Esprima
         private static readonly HashSet<string> AssignmentOperators = new HashSet<string>
         {
             "=", "*=", "**=", "/=", "%=","+=", "-=",
-            "<<=", ">>=", ">>>=", "&=", "^=", "|="
+            "<<=", ">>=", ">>>=", "&=", "^=", "|=", "**="
         };
 
         private readonly Stack<HoistingScope> _hoistingScopes = new Stack<HoistingScope>();
@@ -212,7 +212,7 @@ namespace Esprima
             _startMarker.LineStart = _scanner.LineStart;
 
             var next = _scanner.Lex();
-            _hasLineTerminator = (token != null && next != null) ? (token.LineNumber != next.LineNumber) : false;
+            _hasLineTerminator = (token != null && next != null) && (token.LineNumber != next.LineNumber);
 
             if (next != null && _context.Strict && next.Type == TokenType.Identifier)
             {

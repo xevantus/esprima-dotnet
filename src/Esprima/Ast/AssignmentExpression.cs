@@ -31,6 +31,8 @@ namespace Esprima.Ast
         RightShiftAssign,
         [EnumMember(Value = ">>>=")]
         UnsignedRightShiftAssign,
+        [EnumMember(Value = "*=")]
+        ExponentiationAssign,
     }
 
     public class AssignmentExpression : Node,
@@ -80,6 +82,8 @@ namespace Esprima.Ast
                     return AssignmentOperator.RightShiftAssign;
                 case ">>>=":
                     return AssignmentOperator.UnsignedRightShiftAssign;
+                case "**=":
+                    return AssignmentOperator.ExponentiationAssign;
 
                 default:
                     throw new ArgumentOutOfRangeException("Invalid assignment operator: " + op);
